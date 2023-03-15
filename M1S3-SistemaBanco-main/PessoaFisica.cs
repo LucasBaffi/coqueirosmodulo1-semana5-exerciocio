@@ -4,7 +4,7 @@ using M1S3_SistemaBanco;
 
 namespace M1S3_SistemaBanco_main
 {
-    public abstract class PessoaFisica : Cliente
+    public  class PessoaFisica : Cliente
     {
         public string Nome { get; set; }
         public string CPF { get; set; }
@@ -18,13 +18,41 @@ namespace M1S3_SistemaBanco_main
 
         public override string ResumoCliente()
         {
-            
-        return $"{NumeroConta}  |  {Nome}  | {CPF}  |  {DataNascimento}  | {Endereco}  |  {Telefone}";
+
+            return $"{NumeroConta}  |  {Nome}  | {CPF}  |  {DataNascimento}  | {Endereco}  |  {Telefone}";
         }
 
         public bool EhMaior()
         {
             return Idade >= 18;
+        }
+        public static Cliente CriarConta()
+        {
+
+            PessoaFisica pessoa = new PessoaFisica();
+
+            Console.WriteLine("Data de Nascimento do cliente:");
+            pessoa.DataNascimento = DateTime.Parse(Console.ReadLine());
+            if (!pessoa.EhMaior())
+            {
+                Console.WriteLine("não é possivel abrir a conta pois o cliente é menor de idade");
+                return null;
+            }
+            Console.WriteLine("A idade do cliente é " + pessoa.Idade);
+            Console.WriteLine("Nome do cliente:");
+            pessoa.Nome = Console.ReadLine();
+            Console.WriteLine("CPF do cliente:");
+            pessoa.CPF = Console.ReadLine();
+            Console.WriteLine("Endereco do cliente:");
+            pessoa.Endereco = Console.ReadLine();
+            Console.WriteLine("Telefone do cliente:");
+            pessoa.Telefone = Console.ReadLine();
+            Console.WriteLine("Email do cliente:");
+            pessoa.Email = Console.ReadLine();
+            Console.WriteLine("Numero Da Conta");
+            pessoa.NumeroConta = int.Parse(Console.ReadLine());
+
+            return pessoa;
         }
     }
 }
